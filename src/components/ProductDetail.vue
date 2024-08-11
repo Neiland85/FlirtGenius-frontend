@@ -1,15 +1,22 @@
 <template>
-  <div v-if="product">
-    <h1>{{ product.name }}</h1>
-    <img :src="product.image" alt="product.name">
-    <p>{{ product.description }}</p>
-    <p>{{ product.price | currency }}</p>
-    <p>Stock: {{ product.stock }}</p>
-    <button @click="addToCart(product)">Add to Cart</button>
-  </div>
-  <div v-else>
-    <p>Loading product details...</p>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-card v-if="product">
+          <v-img :src="product.image" height="300px"></v-img>
+          <v-card-title>{{ product.name }}</v-card-title>
+          <v-card-subtitle>{{ product.price | currency }}</v-card-subtitle>
+          <v-card-text>{{ product.description }}</v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" @click="addToCart(product)">Add to Cart</v-btn>
+          </v-card-actions>
+        </v-card>
+        <div v-else>
+          <p>Loading product details...</p>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -40,22 +47,4 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Estilos para los detalles del producto */
-img {
-  width: 200px;
-  height: auto;
-}
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #0056b3;
-}
-</style>
 
