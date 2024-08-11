@@ -1,9 +1,3 @@
-
-Entiendo que el archivo README.md actual es bastante básico. Vamos a expandirlo utilizando la estructura y los detalles que te mencioné anteriormente.
-
-Actualización del README.md
-Podemos agregar más secciones para hacerlo más completo y útil para cualquier desarrollador que quiera trabajar en tu proyecto. Aquí tienes una versión ampliada del README.md:
-
 FlirtGenius Frontend
 Aplicación de tienda en línea desarrollada con Vue.js. Permite a los usuarios explorar productos, agregar al carrito y realizar pagos, integrándose con la API del backend para una experiencia de usuario fluida y un manejo eficiente del estado.
 
