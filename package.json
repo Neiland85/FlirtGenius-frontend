@@ -1,27 +1,28 @@
 {
   "name": "flirtgenius-frontend",
   "version": "1.0.0",
-  "description": "Aplicación de tienda en línea desarrollada con Vue.js. Permite a los usuarios explorar productos, agregar al carrito y realizar pagos, integrándose con la API del backend para una experiencia de usuario fluida y un manejo eficiente del estado.",
+  "description": "Aplicación de tienda en línea desarrollada con Vue.js...",
   "author": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "index.js",
-"dependencies": {
-  "vue": "^3.4.37",
-  "vue-router": "^4.0.13",
-  "vuetify": "^3.0.0",
-  "vuex": "^4.0.2"
-},
-"devDependencies": {
-  "@vue/test-utils": "^2.4.6",
-  "babel-jest": "^29.7.0",
-  "jest": "^29.7.0",
-  "sass": "~1.32.0",
-  "sass-loader": "^10.0.0",
-  "vue-cli-plugin-vuetify": "~3.0.0",
-  "vue-jest": "^5.0.0"
-}
+  "dependencies": {
+    "vue": "^3.4.37",
+    "vue-router": "^4.0.13",
+    "vuetify": "^3.0.0",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "^2.4.6",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-vuetify": "~3.0.0",
+    "vue-jest": "^5.0.0"
+  },
   "keywords": [],
   "license": "ISC"
 }
+
