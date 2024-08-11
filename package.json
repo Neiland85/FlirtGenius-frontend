@@ -1,0 +1,12 @@
+{
+  "name": "flirtgenius-frontend",
+  "version": "1.0.0",
+  "description": "Aplicación de tienda en línea desarrollada con Vue.js. Permite a los usuarios explorar productos, agregar al carrito y realizar pagos, integrándose con la API del backend para una experiencia de usuario fluida y un manejo eficiente del estado.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
