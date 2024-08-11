@@ -1,31 +1,29 @@
 <template>
-  <div>
-    <h1>Checkout</h1>
-    <div v-if="cart.length">
-      <div v-for="(item, index) in cart" :key="index">
-        <h2>{{ item.name }}</h2>
-        <p>Price: {{ item.price | currency }}</p>
-        <p>Quantity: {{ item.quantity }}</p>
-      </div>
-      <h3>Total: {{ totalPrice | currency }}</h3>
-
-      <form @submit.prevent="processPayment">
-        <label for="cardNumber">Card Number:</label>
-        <input type="text" v-model="cardNumber" required>
-
-        <label for="expiryDate">Expiry Date:</label>
-        <input type="text" v-model="expiryDate" required>
-
-        <label for="cvc">CVC:</label>
-        <input type="text" v-model="cvc" required>
-
-        <button type="submit">Pay Now</button>
-      </form>
-    </div>
-    <div v-else>
-      <p>Your cart is empty</p>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <h1>Checkout</h1>
+        <div v-if="cart.length">
+          <v-card v-for="(item, index) in cart" :key="index" class="mb-4">
+            <v-card-title>{{ item.name }}</v-card-title>
+            <v-card-subtitle>Price: {{ item.price | currency }}</v-card-subtitle>
+            <v-card-text>Quantity: {{ item.quantity }}</v-card-text>
+          </v-card>
+          <v-divider></v-divider>
+          <h3>Total: {{ totalPrice | currency }}</h3>
+          <v-form @submit.prevent="processPayment">
+            <v-text-field label="Card Number" v-model="cardNumber" required></v-text-field>
+            <v-text-field label="Expiry Date" v-model="expiryDate" required></v-text-field>
+            <v-text-field label="CVC" v-model="cvc" required></v-text-field>
+            <v-btn color="primary" type="submit">Pay Now</v-btn>
+          </v-form>
+        </div>
+        <div v-else>
+          <p>Your cart is empty</p>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -77,27 +75,8 @@ export default {
 </script>
 
 <style scoped>
-form {
-  margin-top: 20px;
-}
-label {
-  display: block;
-  margin: 10px 0 5px;
-}
-input {
-  padding: 8px;
-  width: 100%;
-  margin-bottom: 10px;
-}
-button {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #218838;
+.v-card {
+  padding: 16px;
 }
 </style>
 
