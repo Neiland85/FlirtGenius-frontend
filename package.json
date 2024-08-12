@@ -11,6 +11,7 @@
   "main": "index.js",
   "dependencies": {
     "braces": "^3.0.3",
+    "postcss": "^8.4.31",
     "vue": "^3.4.37",
     "vue-router": "^4.0.13",
     "vuetify": "^3.0.0",
