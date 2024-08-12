@@ -1,29 +1,30 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
-        <h1>Checkout</h1>
-        <div v-if="cart.length">
-          <v-card v-for="(item, index) in cart" :key="index" class="mb-4">
-            <v-card-title>{{ item.name }}</v-card-title>
-            <v-card-subtitle>Price: {{ item.price | currency }}</v-card-subtitle>
-            <v-card-text>Quantity: {{ item.quantity }}</v-card-text>
-          </v-card>
-          <v-divider></v-divider>
-          <h3>Total: {{ totalPrice | currency }}</h3>
-          <v-form @submit.prevent="processPayment">
-            <v-text-field label="Card Number" v-model="cardNumber" required></v-text-field>
-            <v-text-field label="Expiry Date" v-model="expiryDate" required></v-text-field>
-            <v-text-field label="CVC" v-model="cvc" required></v-text-field>
-            <v-btn color="primary" type="submit">Pay Now</v-btn>
-          </v-form>
-        </div>
-        <div v-else>
-          <p>Your cart is empty</p>
-        </div>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div>
+    <h1>Checkout</h1>
+    <form @submit.prevent="submitCheckout">
+      <div>
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" v-model="paymentInfo.cardNumber" id="cardNumber" required>
+      </div>
+      <div>
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" v-model="paymentInfo.expiryDate" id="expiryDate" required placeholder="MM/YY">
+      </div>
+      <div>
+        <label for="cvv">CVV:</label>
+        <input type="text" v-model="paymentInfo.cvv" id="cvv" required>
+      </div>
+      <div>
+        <label for="cardholderName">Cardholder Name:</label>
+        <input type="text" v-model="paymentInfo.cardholderName" id="cardholderName" required>
+      </div>
+      <button type="submit">Pay Now</button>
+    </form>
+
+    <div v-if="loading">Processing payment...</div>
+    <div v-if="error">{{ error }}</div>
+    <div v-if="success">Payment successful! Session ID: {{ sessionId }}</div>
+  </div>
 </template>
 
 <script>
@@ -32,51 +33,92 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      cart: [],
-      cardNumber: '',
-      expiryDate: '',
-      cvc: '',
+      paymentInfo: {
+        cardNumber: '',
+        expiryDate: '',
+        cvv: '',
+        cardholderName: ''
+      },
+      cart: [],  // Esto debe venir del estado global (Vuex) o pasarse como prop
+      loading: false,
+      error: null,
+      success: false,
+      sessionId: null
     };
   },
-  computed: {
-    totalPrice() {
-      return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
-    },
-  },
-  created() {
-    this.loadCart();
-  },
   methods: {
-    loadCart() {
-      const storedCart = JSON.parse(localStorage.getItem('cart'));
-      if (storedCart) {
-        this.cart = storedCart;
-      }
-    },
-    async processPayment() {
+    async submitCheckout() {
+      this.loading = true;
+      this.error = null;
+      this.success = false;
+
       try {
-        const paymentData = {
-          cart: this.cart,
-          cardNumber: this.cardNumber,
-          expiryDate: this.expiryDate,
-          cvc: this.cvc,
-        };
-        const response = await axios.post('http://localhost:5000/checkout', paymentData);
-        alert('Payment successful!');
-        localStorage.removeItem('cart');  // Clear cart after successful payment
-        this.$router.push('/');
+        // Asegúrate de que el carrito contenga los productos seleccionados
+        const response = await axios.post('http://localhost:3000/payments/checkout', {
+          items: this.cart,
+          paymentInfo: this.paymentInfo
+        });
+
+        // Guardar la sesión de Stripe en caso de que se necesite para futuras consultas
+        this.sessionId = response.data.id;
+        this.success = true;
       } catch (error) {
-        console.error('Payment error:', error);
-        alert('There was an issue processing your payment.');
+        // Manejar errores y mostrar un mensaje al usuario
+        console.error('Error processing payment:', error);
+        this.error = 'There was a problem processing your payment. Please try again.';
+      } finally {
+        this.loading = false;
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
-.v-card {
-  padding: 16px;
+/* Estilos básicos para el formulario */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+div[role="alert"] {
+  margin-top: 20px;
+  color: red;
+}
+
+div[role="status"] {
+  margin-top: 20px;
+  color: green;
 }
 </style>
 
