@@ -10,6 +10,7 @@
   },
   "main": "index.js",
   "dependencies": {
+    "braces": "^3.0.3",
     "vue": "^3.4.37",
     "vue-router": "^4.0.13",
     "vuetify": "^3.0.0",
@@ -17,8 +18,9 @@
   },
   "resolutions": {
     "braces": "^3.0.3"
-}
+  },
   "devDependencies": {
+    "@vue/cli-service": "^5.0.8",
     "@vue/test-utils": "^2.4.6",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
@@ -30,4 +32,3 @@
   "keywords": [],
   "license": "ISC"
 }
-  
