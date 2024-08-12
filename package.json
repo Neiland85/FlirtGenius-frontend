@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Aplicación de tienda en línea desarrollada con Vue.js...",
   "author": "",
-"scripts": {
-  "serve": "vue-cli-service serve",
-  "build": "vue-cli-service build",
-  "test": "vue-cli-service test:unit",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "index.js",
@@ -16,6 +15,9 @@
     "vuetify": "^3.0.0",
     "vuex": "^4.0.2"
   },
+  "resolutions": {
+    "braces": "^3.0.3"
+}
   "devDependencies": {
     "@vue/test-utils": "^2.4.6",
     "babel-jest": "^26.6.3",
@@ -28,3 +30,4 @@
   "keywords": [],
   "license": "ISC"
 }
+  
