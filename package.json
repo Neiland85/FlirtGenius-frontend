@@ -10,6 +10,7 @@
   },
   "main": "index.js",
   "dependencies": {
+    "axios": "^1.7.3",
     "braces": "^3.0.3",
     "postcss": "^8.4.41",
     "vue": "^3.4.37",
@@ -36,4 +37,3 @@
   "keywords": [],
   "license": "ISC"
 }
-
